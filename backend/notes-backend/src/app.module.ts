@@ -16,7 +16,7 @@ import { AuthController } from './auth/auth.controller';
       type: 'postgres',
       host: 'localhost',
       port: 5432,
-      username: 'postgres',
+      username: 'giuliano',
       password: 'admin123',
       database: 'mis_notas',
       entities: [Note, Category, User],
