@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { NotesContext } from "../context/NotesContext";
 
-function EditButton({ id, title, content, isArchived }) {
-  const { fetchNotes, fetchCategories, getAccessTokenSilently, categories } =
+function EditButton({ id, title, content, isArchived, categories }) {
+  const { fetchNotes, fetchCategories, getAccessTokenSilently } =
     useContext(NotesContext);
 
   const [showModal, setShowModal] = useState(false);
@@ -16,30 +16,19 @@ function EditButton({ id, title, content, isArchived }) {
   const [editContent, setEditContent] = useState(content);
 
   // IDs de categorías seleccionadas para la nota
-  const [selectedCategories, setSelectedCategories] = import { useState, useEffect, useContext } from "react";
-import { NotesContext } from "../context/NotesContext";
-
-function EditButton({ id, title, content, isArchived, noteCategories }) {
-  const { fetchNotes, fetchCategories, getAccessTokenSilently, categories } =
-    useContext(NotesContext);
-
-  const [showModal, setShowModal] = useState(false);
-  const [editTitle, setEditTitle] = useState(title);
-  const [editContent, setEditContent] = useState(content);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  // Cuando se abre el modal, cargamos las categorías y sincronizamos estado
+  // Fetch para traer todas las categorías cuando se abre el modal
   useEffect(() => {
     if (showModal) {
+      fetchCategories();
       setEditTitle(title);
       setEditContent(content);
-      setSelectedCategories(
-        noteCategories ? noteCategories.map((c) => c.id) : []
-      );
-      fetchCategories(); // carga todas las categorías disponibles
+      setSelectedCategories(categories ? categories.map((c) => c.id) : []);
     }
-  }, [showModal, title, content, noteCategories, fetchCategories]);
+  }, [showModal]);
 
+  // Función para toggle de categorías seleccionadas
   function toggleCategory(catId) {
     if (selectedCategories.includes(catId)) {
       setSelectedCategories(selectedCategories.filter((id) => id !== catId));
@@ -76,12 +65,14 @@ function EditButton({ id, title, content, isArchived, noteCategories }) {
       if (!response.ok) throw new Error("Failed to update note");
 
       setShowModal(false);
+      alert("Note updated successfully!");
       fetchNotes();
     } catch (error) {
       console.error(error);
       alert("Error updating note");
     }
   }
+
   return (
     <div>
       <button
@@ -168,7 +159,7 @@ function EditButton({ id, title, content, isArchived, noteCategories }) {
                   className="hidden absolute z-10 mt-2 w-48 bg-white rounded-lg shadow-sm dark:bg-gray-700 max-h-48 overflow-auto"
                 >
                   <ul className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200">
-                    {categories.map((category) => (
+                    {allCategories.map((category) => (
                       <li key={category.id}>
                         <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                           <input
