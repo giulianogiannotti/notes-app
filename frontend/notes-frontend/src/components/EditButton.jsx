@@ -24,6 +24,7 @@ function EditButton({ id, title, content, isArchived, categories }) {
       fetchCategories();
       setEditTitle(title);
       setEditContent(content);
+      fetchCategories();
       setSelectedCategories(categories ? categories.map((c) => c.id) : []);
     }
   }, [showModal]);
