@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { NotesContext } from "../context/NotesContext";
 
 function EditButton({ id, title, content, isArchived, categories }) {
-  const { fetchNotes, fetchCategories, getAccessTokenSilently } =
+  const { fetchNotes, fetchCategories, getAccessTokenSilently, categories } =
     useContext(NotesContext);
 
   const [showModal, setShowModal] = useState(false);
@@ -24,7 +24,6 @@ function EditButton({ id, title, content, isArchived, categories }) {
       fetchCategories();
       setEditTitle(title);
       setEditContent(content);
-      fetchCategories();
       setSelectedCategories(categories ? categories.map((c) => c.id) : []);
     }
   }, [showModal]);
