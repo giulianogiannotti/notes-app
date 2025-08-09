@@ -16,19 +16,30 @@ function EditButton({ id, title, content, isArchived }) {
   const [editContent, setEditContent] = useState(content);
 
   // IDs de categorías seleccionadas para la nota
+  const [selectedCategories, setSelectedCategories] = import { useState, useEffect, useContext } from "react";
+import { NotesContext } from "../context/NotesContext";
+
+function EditButton({ id, title, content, isArchived, noteCategories }) {
+  const { fetchNotes, fetchCategories, getAccessTokenSilently, categories } =
+    useContext(NotesContext);
+
+  const [showModal, setShowModal] = useState(false);
+  const [editTitle, setEditTitle] = useState(title);
+  const [editContent, setEditContent] = useState(content);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  // Fetch para traer todas las categorías cuando se abre el modal
+  // Cuando se abre el modal, cargamos las categorías y sincronizamos estado
   useEffect(() => {
     if (showModal) {
-      fetchCategories();
       setEditTitle(title);
       setEditContent(content);
-      setSelectedCategories(categories ? categories.map((c) => c.id) : []);
+      setSelectedCategories(
+        noteCategories ? noteCategories.map((c) => c.id) : []
+      );
+      fetchCategories(); // carga todas las categorías disponibles
     }
-  }, [showModal]);
+  }, [showModal, title, content, noteCategories, fetchCategories]);
 
-  // Función para toggle de categorías seleccionadas
   function toggleCategory(catId) {
     if (selectedCategories.includes(catId)) {
       setSelectedCategories(selectedCategories.filter((id) => id !== catId));
@@ -36,10 +47,6 @@ function EditButton({ id, title, content, isArchived }) {
       setSelectedCategories([...selectedCategories, catId]);
     }
   }
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
 
   async function updateNote(e) {
     e.preventDefault();
@@ -69,14 +76,12 @@ function EditButton({ id, title, content, isArchived }) {
       if (!response.ok) throw new Error("Failed to update note");
 
       setShowModal(false);
-      alert("Note updated successfully!");
       fetchNotes();
     } catch (error) {
       console.error(error);
       alert("Error updating note");
     }
   }
-
   return (
     <div>
       <button
