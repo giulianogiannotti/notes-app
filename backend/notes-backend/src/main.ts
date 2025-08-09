@@ -5,7 +5,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: 'https://notes-app-three-theta-79.vercel.app/',
+    origin: 'https://notes-app-three-theta-79.vercel.app',
   });
 
   await app.listen(3000);
