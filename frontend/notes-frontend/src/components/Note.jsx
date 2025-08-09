@@ -28,7 +28,6 @@ function Note({ id, title, content, isArchived, categories }) {
             title={title}
             content={content}
             isArchived={isArchived}
-            categories={categories}
           ></EditButton>
           <ArchiveButton id={id} isArchived={isArchived}></ArchiveButton>
           <DeleteButton id={id}></DeleteButton>
