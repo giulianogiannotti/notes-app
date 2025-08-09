@@ -37,6 +37,10 @@ function EditButton({ id, title, content, isArchived }) {
     }
   }
 
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
   async function updateNote(e) {
     e.preventDefault();
 
