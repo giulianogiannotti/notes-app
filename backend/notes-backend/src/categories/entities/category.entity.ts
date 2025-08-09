@@ -7,7 +7,7 @@ export class Category {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ nullable: true })
+  @Column()
   name: string;
 
   @ManyToMany(() => Note, note => note.categories)
