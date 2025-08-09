@@ -11,8 +11,8 @@ function ArchiveButton({ id, isArchived }) {
       const token = await getAccessTokenSilently();
 
       const url = archived
-        ? `http://localhost:3000/notes/${id}/unarchive`
-        : `http://localhost:3000/notes/${id}/archive`;
+        ? `https://notes-app-xk58.onrender.com/notes/${id}/unarchive`
+        : `https://notes-app-xk58.onrender.com/notes/${id}/archive`;
 
       const response = await fetch(url, {
         method: "PATCH",

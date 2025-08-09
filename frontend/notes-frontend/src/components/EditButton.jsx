@@ -50,14 +50,17 @@ function EditButton({ id, title, content, isArchived, categories }) {
     try {
       const token = await getAccessTokenSilently();
 
-      const response = await fetch(`http://localhost:3000/notes/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(dataToSend),
-      });
+      const response = await fetch(
+        `https://notes-app-xk58.onrender.com/notes/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(dataToSend),
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to update note");
 

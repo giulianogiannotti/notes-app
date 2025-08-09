@@ -28,18 +28,21 @@ function Heading({}) {
     try {
       const token = await getAccessTokenSilently();
 
-      const response = await fetch("http://localhost:3000/notes", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          title,
-          content,
-          categories: selectedCategories.map((id) => ({ id })),
-        }),
-      });
+      const response = await fetch(
+        "https://notes-app-xk58.onrender.com/notes",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            title,
+            content,
+            categories: selectedCategories.map((id) => ({ id })),
+          }),
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to create note");
       const createdNote = await response.json();

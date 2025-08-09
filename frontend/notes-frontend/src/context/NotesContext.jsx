@@ -21,11 +21,14 @@ export function NotesProvider({ children }) {
     try {
       const token = await getAccessTokenSilently();
 
-      const response = await fetch("http://localhost:3000/notes/all", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://notes-app-xk58.onrender.com/notes/all",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -48,11 +51,14 @@ export function NotesProvider({ children }) {
     try {
       const token = await getAccessTokenSilently();
 
-      const response = await fetch("http://localhost:3000/categories", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://notes-app-xk58.onrender.com/categories",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Error fetching categories");
@@ -70,11 +76,14 @@ export function NotesProvider({ children }) {
     async function loginBackend() {
       if (isAuthenticated) {
         const token = await getAccessTokenSilently();
-        const res = await fetch("http://localhost:3000/auth/login", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await fetch(
+          "https://notes-app-xk58.onrender.com/auth/login",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         const data = await res.json();
       }
     }

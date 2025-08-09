@@ -10,12 +10,15 @@ function DeleteButton({ id }) {
     try {
       const token = await getAccessTokenSilently();
 
-      const response = await fetch(`http://localhost:3000/notes/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `https://notes-app-xk58.onrender.com/notes/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to delete note");
