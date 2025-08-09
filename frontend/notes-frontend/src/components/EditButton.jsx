@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { NotesContext } from "../context/NotesContext";
 
-function EditButton({ id, title, content, isArchived, categories }) {
+function EditButton({ id, title, content, isArchived }) {
   const { fetchNotes, fetchCategories, getAccessTokenSilently, categories } =
     useContext(NotesContext);
 
