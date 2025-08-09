@@ -28,6 +28,12 @@ function EditButton({ id, title, content, isArchived  }) {
     }
   }, [showModal]);
 
+  // Nuevo useEffect para sincronizar con categories del contexto
+  useEffect(() => {
+    setAllCategories(categories || []);
+  }, [categories]);
+
+
   // Función para toggle de categorías seleccionadas
   function toggleCategory(catId) {
     if (selectedCategories.includes(catId)) {
