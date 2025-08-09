@@ -15,7 +15,7 @@ import { AuthController } from './auth/auth.controller';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.HOST,
-      port: process.env.PORT ? parseInt(process.env.PORT, 10) : undefined,
+      port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : undefined,
       username: process.env.USERNAME,
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
