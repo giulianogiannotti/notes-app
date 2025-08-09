@@ -111,7 +111,7 @@ function Heading({}) {
           >
             <option value="default">Filter by status</option>
             <option value="active">Active</option>
-            <option value="archived">Archived</option>
+            <option value="archived">Done</option>
           </select>
         </div>
 
