@@ -6,7 +6,7 @@ export const AppDataSource = new DataSource({
   host: 'localhost',
   port: 5432,
   username: 'giuliano',
-  password: 'admin123',
+  password: 'I5XunMtp06asbP3GFXoFhCjT3VRwR4Jx',
   database: 'mis_notas',
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
   migrations: [__dirname + '/migrations/*{.ts,.js}'],

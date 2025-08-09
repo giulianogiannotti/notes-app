@@ -17,7 +17,7 @@ import { AuthController } from './auth/auth.controller';
       host: 'localhost',
       port: 5432,
       username: 'giuliano',
-      password: 'admin123',
+      password: 'I5XunMtp06asbP3GFXoFhCjT3VRwR4Jx',
       database: 'mis_notas',
       entities: [Note, Category, User],
       synchronize: true,
