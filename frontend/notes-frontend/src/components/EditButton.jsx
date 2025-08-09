@@ -9,7 +9,7 @@ function EditButton({ id, title, content, isArchived  }) {
   const [showModal, setShowModal] = useState(false);
 
   // Todos las categorías que existen en la base
-  const [allCategories, setAllCategories] = useState(categories);
+  const [allCategories, setAllCategories] = useState([]);
 
   // Estados para inputs editables
   const [editTitle, setEditTitle] = useState(title);
