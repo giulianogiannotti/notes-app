@@ -163,7 +163,7 @@ function EditButton({ id, title, content, isArchived }) {
                   className="hidden absolute z-10 mt-2 w-48 bg-white rounded-lg shadow-sm dark:bg-gray-700 max-h-48 overflow-auto"
                 >
                   <ul className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200">
-                    {allCategories.map((category) => (
+                    {categories.map((category) => (
                       <li key={category.id}>
                         <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                           <input
