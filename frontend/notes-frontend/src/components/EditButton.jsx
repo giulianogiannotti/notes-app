@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
-import { useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { NotesContext } from "../context/NotesContext";
 
-function EditButton({ id, title, content, isArchived, categories: noteCategories }) {
+function EditButton({ id, title, content, isArchived, noteCategories }) {
   const { fetchNotes, fetchCategories, getAccessTokenSilently, categories } =
     useContext(NotesContext);
 
@@ -12,23 +11,23 @@ function EditButton({ id, title, content, isArchived, categories: noteCategories
   const [editContent, setEditContent] = useState(content);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
+  // Cuando se abre el modal, cargo datos iniciales y categorías de la nota
   useEffect(() => {
     if (showModal) {
       fetchCategories();
       setEditTitle(title);
       setEditContent(content);
-      // Marcar solo las categorías de la nota
-      setSelectedCategories(noteCategories ? noteCategories.map((c) => c.id) : []);
+      setSelectedCategories(
+        noteCategories ? noteCategories.map((c) => c.id) : []
+      );
     }
   }, [showModal]);
 
+  // Cuando cambian las categorías del contexto, actualizo lista total
   useEffect(() => {
     setAllCategories(categories || []);
   }, [categories]);
 
-
-
-  // Función para toggle de categorías seleccionadas
   function toggleCategory(catId) {
     if (selectedCategories.includes(catId)) {
       setSelectedCategories(selectedCategories.filter((id) => id !== catId));
