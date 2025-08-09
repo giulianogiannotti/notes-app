@@ -2,36 +2,30 @@ import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { NotesContext } from "../context/NotesContext";
 
-function EditButton({ id, title, content, isArchived  }) {
+function EditButton({ id, title, content, isArchived, categories: noteCategories }) {
   const { fetchNotes, fetchCategories, getAccessTokenSilently, categories } =
     useContext(NotesContext);
 
   const [showModal, setShowModal] = useState(false);
-
-  // Todos las categorías que existen en la base
   const [allCategories, setAllCategories] = useState([]);
-
-  // Estados para inputs editables
   const [editTitle, setEditTitle] = useState(title);
   const [editContent, setEditContent] = useState(content);
-
-  // IDs de categorías seleccionadas para la nota
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  // Fetch para traer todas las categorías cuando se abre el modal
   useEffect(() => {
     if (showModal) {
       fetchCategories();
       setEditTitle(title);
       setEditContent(content);
-      setSelectedCategories(categories ? categories.map((c) => c.id) : []);
+      // Marcar solo las categorías de la nota
+      setSelectedCategories(noteCategories ? noteCategories.map((c) => c.id) : []);
     }
   }, [showModal]);
 
-  // Nuevo useEffect para sincronizar con categories del contexto
   useEffect(() => {
     setAllCategories(categories || []);
   }, [categories]);
+
 
 
   // Función para toggle de categorías seleccionadas
