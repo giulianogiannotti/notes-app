@@ -137,7 +137,7 @@ export function NotesProvider({ children }) {
         filterByStatus,
         filterByCategories,
         getAccessTokenSilently,
-        user,
+        isAuthenticated,
       }}
     >
       {children}

@@ -11,6 +11,7 @@ function Heading({}) {
     fetchCategories,
     categories,
     getAccessTokenSilently,
+    isAuthenticated,
   } = useContext(NotesContext);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -83,7 +84,14 @@ function Heading({}) {
 
         <button
           onClick={() => setIsModalOpen(true)}
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex-shrink-0 order-1"
+          disabled={!isAuthenticated}
+          className={`text-white font-medium rounded-lg text-sm px-4 py-2 flex-shrink-0 order-1
+        ${
+          isAuthenticated
+            ? "bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer"
+            : "bg-blue-300 cursor-not-allowed"
+        }
+      `}
         >
           Create Note
         </button>
@@ -91,7 +99,14 @@ function Heading({}) {
         <div className="max-w-sm flex-grow min-w-[180px] order-2">
           <select
             id="filterStatus"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full text-sm px-4 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            disabled={!isAuthenticated}
+            className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full text-sm px-4 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+          ${
+            isAuthenticated
+              ? "focus:ring-blue-500 focus:border-blue-500"
+              : "opacity-50 cursor-not-allowed"
+          }
+        `}
             onChange={handleFilterStatusChange}
           >
             <option value="default">Filter by status</option>
@@ -103,7 +118,14 @@ function Heading({}) {
         <div className="max-w-sm flex-grow min-w-[180px] order-2">
           <select
             id="filterCategories"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full text-sm px-4 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            disabled={!isAuthenticated}
+            className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full text-sm px-4 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+          ${
+            isAuthenticated
+              ? "focus:ring-blue-500 focus:border-blue-500"
+              : "opacity-50 cursor-not-allowed"
+          }
+        `}
             onChange={handleFilterCategoriesChange}
           >
             <option value="default">Filter by category</option>
@@ -151,9 +173,9 @@ function Heading({}) {
                   name="content"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
-                  rows="4"
+                  rows={4}
                   className="resize-none block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                  placeholder="Write your thoughts here..."
+                  placeholder="Write your ideas, thoughts or reminders..."
                 ></textarea>
               </div>
 
@@ -163,7 +185,7 @@ function Heading({}) {
                   onClick={() =>
                     document
                       .getElementById("dropdownBgHover")
-                      .classList.toggle("hidden")
+                      ?.classList.toggle("hidden")
                   }
                   className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
@@ -198,6 +220,7 @@ function Heading({}) {
                             id={`cat-${category.id}`}
                             checked={selectedCategories.includes(category.id)}
                             onChange={() => toggleCategory(category.id)}
+                            disabled={!isAuthenticated}
                             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:bg-gray-600 dark:border-gray-500"
                           />
                           <label
@@ -215,7 +238,14 @@ function Heading({}) {
 
               <button
                 type="submit"
-                className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                disabled={!isAuthenticated}
+                className={`w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center
+              ${
+                isAuthenticated
+                  ? "bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer"
+                  : "bg-blue-300 cursor-not-allowed"
+              }
+            `}
               >
                 Create Note
               </button>
