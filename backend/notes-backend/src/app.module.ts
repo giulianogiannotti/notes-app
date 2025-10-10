@@ -14,11 +14,11 @@ import { AuthController } from './auth/auth.controller';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.HOST,
-      port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : undefined,
-      username: process.env.USERNAME,
-      password: process.env.PASSWORD,
-      database: process.env.DATABASE,
+      host: 'dpg-d3kje615pdvs739jif50-a',
+      port: 5432,
+      username: 'postgress',
+      password: 'GfrSbCHMbw6jN5VS2wQPEe2kwsENpcJ3',
+      database: 'notes_app_y1tp',
       entities: [Note, Category, User],
       synchronize: true,
     }),
