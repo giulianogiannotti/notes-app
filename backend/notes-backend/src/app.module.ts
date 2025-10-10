@@ -20,7 +20,7 @@ import { AuthController } from './auth/auth.controller';
       password: 'GfrSbCHMbw6jN5VS2wQPEe2kwsENpcJ3',
       database: 'notes_app_y1tp',
       entities: [Note, Category, User],
-      synchronize: true,
+      synchronize: false,
     }),
     NotesModule,
     CategoriesModule,
